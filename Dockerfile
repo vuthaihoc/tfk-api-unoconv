@@ -3,6 +3,10 @@ FROM telemark/docker-node-unoconv:8.11.2@sha256:a0ccd23cec011eb679b5b8f32f068193
 
 #### Begin setup ####
 
+# Update fonts
+COPY ./fonts/* /usr/local/share/fonts/
+RUN fc-cache -fv
+
 # Bundle app source
 COPY . /src
 
@@ -14,9 +18,9 @@ RUN npm install --production
 
 # Env variables
 ENV SERVER_PORT 3000
-ENV PAYLOAD_MAX_SIZE 1048576
-ENV TIMEOUT_SERVER 120000
-ENV TIMEOUT_SOCKET 140000
+ENV PAYLOAD_MAX_SIZE 104857600
+ENV TIMEOUT_SERVER 300000
+ENV TIMEOUT_SOCKET 330000
 
 # Expose 3000
 EXPOSE 3000
